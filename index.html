@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image" href="L.png">
+<title>Farms View</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    #container {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #urlText {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    #urlInput {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    #frame {
+        width: 100%;
+        height: 500px;
+        border: none;
+    }
+
+    #buttons {
+        text-align: center;
+    }
+
+    button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+    p {
+        text-align: center;
+        padding: 10px;
+        border: 2px solid #007bff;
+        border-radius: 10px;
+        transition: border-color 0.3s;
+    }
+
+    p:hover {
+        border-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="urlText">Farm:</div>
+    <div id="buttons">
+    	<input type="number" id="urlInput" value="570">
+        <button id="Search" onclick="updateUrl(true)">Search</button>
+    </div>
+    <div id="frameContainer">
+        <iframe id="frame" src="https://play.pixels.xyz/pixels/share/570"></iframe>
+    </div>
+    <div id="buttons">
+        <button id="prevButton" onclick="navigate(-1)">←</button>
+        <button id="nextButton" onclick="navigate(1)">→</button>
+    </div>
+    <p>DONATE RONIN: 0xeb22c698ef783637825477ed0094eb962cb372fb</p>
+</div>
+
+<script>
+	let currentUrl = 570;
+    const iframe = document.getElementById('frame');
+    const urlText = document.getElementById('urlText');
+    const urlInput = document.getElementById('urlInput');
+
+    function navigate(direction) {
+        currentUrl += direction;
+        updateUrl(false);
+    }
+
+    function updateUrl(nun) {
+    	if (nun == true){
+        	currentUrl = parseInt(urlInput.value)
+        }
+        const newUrl = `https://play.pixels.xyz/pixels/share/${currentUrl}`;
+        iframe.src = newUrl;
+        urlInput.value = parseInt(currentUrl);
+    }
+
+</script>
+</body>
+</html>
