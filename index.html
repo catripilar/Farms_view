@@ -12,7 +12,7 @@
         margin: 0;
         padding: 0;
         background: rgb(13,121,9);
-	background: linear-gradient(90deg, rgba(13,121,9,1) 22%, rgba(0,189,255,1) 100%);
+        background: linear-gradient(90deg, rgba(13,121,9,1) 22%, rgba(0,189,255,1) 100%);
     }
 
     #container {
@@ -23,6 +23,26 @@
         background-color: #f0f0f0;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #frameContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .iframeCard {
+        width: calc(50% - 10px);
+        margin-right: 10px;
+        margin-bottom: 10px;
     }
 
     #urlText {
@@ -44,7 +64,7 @@
 
     #frame {
         width: 100%;
-        height: 500px;
+        height: 300px; /* adjust as needed */
         border: none;
     }
 
@@ -84,43 +104,69 @@
 <div id="container">
     <div id="urlText">Farm:</div>
     <div id="buttons">
-    	<input type="number" id="urlInput" value="570">
-        <button id="Search" onclick="updateUrl(true)">Search</button>
+        <input type="number" id="urlInput" value="570">
+        <button id="Search" onclick="updateUrl(1,true)">Search</button>
     </div>
     <div id="frameContainer">
-        <iframe id="frame" src="https://play.pixels.xyz/pixels/share/570"></iframe>
+        <div class="iframeCard">
+            <iframe id="frame1" class="frame" src="https://play.pixels.xyz/pixels/share/570"></iframe>
+            <div class="frm">Farm: 570</div>
+        </div>
+        <div class="iframeCard">
+            <iframe id="frame2" class="frame" src="https://play.pixels.xyz/pixels/share/571"></iframe>
+            <div class="frm">Farm: 571</div>
+        </div>
+        <div class="iframeCard">
+            <iframe id="frame3" class="frame" src="https://play.pixels.xyz/pixels/share/572"></iframe>
+            <div class="frm">Farm: 572</div>
+        </div>
+        <div class="iframeCard">
+            <iframe id="frame4" class="frame" src="https://play.pixels.xyz/pixels/share/573"></iframe>
+            <div class="frm">Farm: 573</div>
+        </div>
     </div>
     <div id="buttons">
         <button id="prevButton" onclick="navigate(-1)">←</button>
         <button id="nextButton" onclick="navigate(1)">→</button>
     </div>
-    	<p>DONATE RONIN: 0xeb22c698ef783637825477ed0094eb962cb372fb</p>
-	<br></br>
-	<p>DONATE EVM: 0x0B54b1d53cd135E34eFF1B8c3874e6a3d522FAf6</p>
-	<br></br>
-	<p>DONATE SOLANA: 8nbgGRdYAFwTH2mfYCCTmyD9XP88afyJ6ANsReVjh8UG</p>
+    <p>DONATE RONIN: 0xeb22c698ef783637825477ed0094eb962cb372fb</p>
+    <br></br>
+    <p>DONATE EVM: 0x0B54b1d53cd135E34eFF1B8c3874e6a3d522FAf6</p>
+    <br></br>
+    <p>DONATE SOLANA: 8nbgGRdYAFwTH2mfYCCTmyD9XP88afyJ6ANsReVjh8UG</p>
 </div>
 
 <script>
-	let currentUrl = 570;
-    const iframe = document.getElementById('frame');
+    let currentUrl = 570;
+    const iframes = document.querySelectorAll('.frame');
+    const ifrm = document.querySelectorAll('.frm');
     const urlText = document.getElementById('urlText');
     const urlInput = document.getElementById('urlInput');
 
     function navigate(direction) {
         currentUrl += direction;
-        updateUrl(false);
+        updateUrl(direction,false);
     }
 
-    function updateUrl(nun) {
+    function updateUrl(direction,nun) {
     	if (nun == true){
         	currentUrl = parseInt(urlInput.value)
         }
-        const newUrl = `https://play.pixels.xyz/pixels/share/${currentUrl}`;
-        iframe.src = newUrl;
+        currentUrl += 3*direction
+    	const nuns = [currentUrl,currentUrl+1,currentUrl+2,currentUrl+3];
+        const newUrls = [
+            `https://play.pixels.xyz/pixels/share/${nuns[0]}`,
+            `https://play.pixels.xyz/pixels/share/${nuns[1]}`,
+            `https://play.pixels.xyz/pixels/share/${nuns[2]}`,
+            `https://play.pixels.xyz/pixels/share/${nuns[3]}`
+        ];
+        iframes.forEach((iframe, index) => {
+            iframe.src = newUrls[index];
+            ifrm[index].textContent = `Farm: ${nuns[index]}`;
+        });
+        currentUrl = nuns[0];
         urlInput.value = parseInt(currentUrl);
     }
-
 </script>
 </body>
 </html>
