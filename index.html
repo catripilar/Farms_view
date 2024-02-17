@@ -108,20 +108,12 @@
     </div>
     <div id="frameContainer">
         <div class="iframeCard">
-            <iframe id="frame1" class="frame" src="https://play.pixels.xyz/pixels/share/570"></iframe>
+            <iframe class="frame" src="https://play.pixels.xyz/pixels/share/570"></iframe>
             <div class="frm">Farm: 570</div>
         </div>
         <div class="iframeCard">
-            <iframe id="frame2" class="frame" src="https://play.pixels.xyz/pixels/share/571"></iframe>
+            <iframe class="frame" src="https://play.pixels.xyz/pixels/share/571"></iframe>
             <div class="frm">Farm: 571</div>
-        </div>
-        <div class="iframeCard">
-            <iframe id="frame3" class="frame" src="https://play.pixels.xyz/pixels/share/572"></iframe>
-            <div class="frm">Farm: 572</div>
-        </div>
-        <div class="iframeCard">
-            <iframe id="frame4" class="frame" src="https://play.pixels.xyz/pixels/share/573"></iframe>
-            <div class="frm">Farm: 573</div>
         </div>
     </div>
     <div id="buttons">
@@ -152,12 +144,10 @@
         	currentUrl = parseInt(urlInput.value)
         }
         currentUrl += 3*direction
-    	const nuns = [currentUrl,currentUrl+1,currentUrl+2,currentUrl+3];
+    	const nuns = [currentUrl,currentUrl+1];
         const newUrls = [
             `https://play.pixels.xyz/pixels/share/${nuns[0]}`,
             `https://play.pixels.xyz/pixels/share/${nuns[1]}`,
-            `https://play.pixels.xyz/pixels/share/${nuns[2]}`,
-            `https://play.pixels.xyz/pixels/share/${nuns[3]}`
         ];
         iframes.forEach((iframe, index) => {
             iframe.src = newUrls[index];
