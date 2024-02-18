@@ -61,8 +61,8 @@
     }
 
     .frame {
-        width: 380px;
-        height: 380px;
+        width: 780px;
+        height: 780px;
         margin: 10px;
         border: none;
     }
@@ -143,11 +143,10 @@
     	if (nun == true){
         	currentUrl = parseInt(urlInput.value)
         }
-        currentUrl += 3*direction
-    	const nuns = [currentUrl,currentUrl+1];
+        currentUrl += direction//3*direction
+    	const nuns = [currentUrl];
         const newUrls = [
-            `https://play.pixels.xyz/pixels/share/${nuns[0]}`,
-            `https://play.pixels.xyz/pixels/share/${nuns[1]}`,
+            `https://play.pixels.xyz/pixels/share/${nuns[0]}`
         ];
         iframes.forEach((iframe, index) => {
             iframe.src = newUrls[index];
